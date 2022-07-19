@@ -24,7 +24,7 @@ public class BuscafilmesAPIRest {
         String body = response.body();
 
         // Imprimir o JSON recuperado.
-        System.out.println(body);
+        //System.out.println(body);
 
         // Extrair só os dados que interessam (titulo, poster, classificação)
         JsonParserManual parser = new JsonParserManual();
@@ -38,7 +38,7 @@ public class BuscafilmesAPIRest {
         for ( Map<String, String> filme: listaDeFilmes) {
         	 
             System.out.println("Título: "+ filme.get("title"));
-            System.out.println("Poster: "+ filme.get("image"));
+            System.out.println("Imagem: "+ filme.get("image"));
             System.out.println("Classificação: "+ filme.get("rank"));
             Integer classificacao;
             
@@ -49,7 +49,7 @@ public class BuscafilmesAPIRest {
 			}          
             
             String stars = "";  
-            Integer graficoEstrelinha = 100 - (classificacao * 100)/300;
+            Integer graficoEstrelinha = (classificacao * 100)/100;
             
             for(int i = 0; i < graficoEstrelinha; i++) {
                 stars = stars + "\u2B50";
