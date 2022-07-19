@@ -10,11 +10,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
+import br.com.buscafilmes.util.GerarFigurinhasWhatsApp;
+
 public class BuscafilmesAPIRest {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		final String URLCurso = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
         final String url = "https://raw.githubusercontent.com/alexfelipe/imersao-java/json/top250.json";
         
+		GerarFigurinhasWhatsApp gerado = new GerarFigurinhasWhatsApp();
+		try {
+			gerado.cria();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro imagem: " + e.getMessage());
+		}
 		
 		// Fazer uma conexão HTTP e buscar os top 250 filmes
         URI endereco = URI.create(URLCurso);
@@ -46,6 +56,7 @@ public class BuscafilmesAPIRest {
             	classificacao = Integer.parseInt(filme.get("rank"));
 			} catch (Exception e) {
 				classificacao = 0;
+				JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
 			}          
             
             String stars = "";  
