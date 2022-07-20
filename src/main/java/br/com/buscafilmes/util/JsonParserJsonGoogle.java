@@ -1,4 +1,4 @@
-package br.com.buscafilmes;
+package br.com.buscafilmes.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -3,8 +3,26 @@
 	<groupId>br.com.buscafilmes</groupId>
 	<artifactId>BuscarFilmesAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>BuscarFilmesAPI</name>
 	<description>Programa em java para buscar filmes consumento uma API REST</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<fork>true</fork>
+					<executable>/home/seuusername/jdk1.8/bin/javac</executable>
+					<compilerVersion>1.8</compilerVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
