@@ -42,24 +42,24 @@ public class BuscafilmesAPIRest {
         
         for ( Map<String, String> filme: listaDeFilmes) {
         	String urlImagem = filme.get("image");
-        	
-            System.out.println("Título: "+ filme.get("title"));
-            System.out.println("Imagem: "+ urlImagem);
-            System.out.println("Classificação: "+ filme.get("rank"));
-    		
-            try {
-    			gerarFigurinha.cria(urlImagem);
-    		} catch (Exception e) {
-    			JOptionPane.showMessageDialog(null, "Erro imagem: " + e.getMessage());
-    		}
-            
             Integer classificacao;
+            
             try {
             	classificacao = Integer.parseInt(filme.get("rank"));
 			} catch (Exception e) {
 				classificacao = 0;
 				JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
-			}    
+			}  
+            
+            System.out.println("Título: "+ filme.get("title"));
+            System.out.println("Imagem: "+ urlImagem);
+            System.out.println("Classificação: "+ classificacao);
+    		
+            try {
+    			gerarFigurinha.cria(urlImagem, classificacao);
+    		} catch (Exception e) {
+    			JOptionPane.showMessageDialog(null, "Erro imagem: " + e.getMessage());
+    		}
             
             String stars = "";  
             Integer graficoEstrelinha = (classificacao * 100)/100;

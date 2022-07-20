@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class gerarFigurinha {
 
-	public void cria(String urlImagem) throws Exception {
+	public void cria(String urlImagem, Integer classificacao) throws Exception {
 		// leitura da imagem
 
 		// InputStream inputStream = new FileInputStream(new
@@ -36,21 +36,32 @@ public class gerarFigurinha {
 		graphics.setFont(fonte);
 
 		// escrever uma frase na imagem
-		graphics.setColor(Color.YELLOW);
-		graphics.drawString("TOPZERA", 0, novaAltura - 100);
+		if (classificacao >= 9) {
+			graphics.setColor(Color.YELLOW);
+			graphics.drawString("TOPZERA", 0, novaAltura - 100);
+		}else if (classificacao >=7 && classificacao <= 9) {
+			graphics.setColor(Color.GREEN);
+			graphics.drawString("LEGAL", 0, novaAltura - 100);
+		}else if (classificacao >=4 && classificacao <= 6) {
+			graphics.setColor(Color.CYAN);
+			graphics.drawString("TEM MELHOR", 0, novaAltura - 100);
+		}else if (classificacao >=3 ) {
+			graphics.setColor(Color.RED);
+			graphics.drawString("RUIM!!", 0, novaAltura - 100);
+		}
 
 		// salvar imagem arquivo
 		ImageIO.write(novaImagem, "png", new File("saida/" + toNomeFigurinha(urlImagem) + ".png"));
 	}
-	
+
 	public static String toNomeFigurinha(String urlImagem) {
 		int length = urlImagem.length();
 		int inicio = 0;
 
-		int i = length-1;
+		int i = length - 1;
 		while (i > 0) {
-			
-			if (urlImagem.substring(i, i+1).equals("/")) {
+
+			if (urlImagem.substring(i, i + 1).equals("/")) {
 				inicio = i + 1;
 				i = 0;
 			} else {
