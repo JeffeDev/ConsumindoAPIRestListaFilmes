@@ -16,20 +16,20 @@ import br.com.buscafilmes.util.JsonParserManual;
 
 public class BuscafilmesAPIRest {
 	public static void main(String[] args) throws IOException, InterruptedException {
-		final String URLCurso = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
+		final String urlCurso = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
         final String url = "https://raw.githubusercontent.com/alexfelipe/imersao-java/json/top250.json";
         
 		gerarFigurinha gerarFigurinha = new gerarFigurinha();
 		
 		// Fazer uma conexão HTTP e buscar os top 250 filmes
-        URI endereco = URI.create(URLCurso);
+        URI endereco = URI.create(url);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
         String body = response.body();
 
         // Imprimir o JSON recuperado.
-        //System.out.println(body);
+        System.out.println(body);
 
         // Extrair só os dados que interessam (titulo, poster, classificação)
         JsonParserManual parser = new JsonParserManual();
@@ -42,31 +42,29 @@ public class BuscafilmesAPIRest {
         
         for ( Map<String, String> filme: listaDeFilmes) {
         	String urlImagem = filme.get("image");
-            Integer classificacao;
-            
+        	Integer classificacao;
+        	String stars = ""; 
+        	
             try {
             	classificacao = Integer.parseInt(filme.get("rank"));
 			} catch (Exception e) {
 				classificacao = 0;
-				JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
 			}  
+            
+            for(int i = 0; i < classificacao; i++) {
+                stars = stars + "\u2B50";
+            }
             
             System.out.println("Título: "+ filme.get("title"));
             System.out.println("Imagem: "+ urlImagem);
             System.out.println("Classificação: "+ classificacao);
+            System.out.println("Data: "+ filme.get("date"));
     		
             try {
-    			gerarFigurinha.cria(urlImagem, classificacao);
+    			gerarFigurinha.criar(urlImagem, classificacao, stars);
     		} catch (Exception e) {
     			JOptionPane.showMessageDialog(null, "Erro imagem: " + e.getMessage());
     		}
-            
-            String stars = "";  
-            Integer graficoEstrelinha = (classificacao * 100)/100;
-            
-            for(int i = 0; i < graficoEstrelinha; i++) {
-                stars = stars + "\u2B50";
-            }
             
             System.out.println(stars);
             System.out.println();	

@@ -31,6 +31,14 @@ public class JsonParserJsonGoogle {
             atributosItem.put("imDbRating", item.getImDbRating());
             atributosItem.put("crew", item.getCrew());
             atributosItem.put("imDbRatingCount", item.getImDbRatingCount());
+            
+            // Nasa
+            atributosItem.put("copyright", item.getCopyright());
+            atributosItem.put("date", item.getDate());
+            atributosItem.put("hdurl", item.getHdurl());
+            atributosItem.put("media_type", item.getMedia_type());
+            atributosItem.put("service_version", item.getService_version());
+            atributosItem.put("url", item.getUrl());
 
             dados.add(atributosItem);
         }
