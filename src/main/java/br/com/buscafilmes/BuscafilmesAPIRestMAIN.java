@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import br.com.buscafilmes.util.JsonParserManual;
 import br.com.buscafilmes.util.gerarFigurinha;
 
-public class BuscafilmesAPIRest {
+public class BuscafilmesAPIRestMAIN {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		final String urlTeste ="https://raw.githubusercontent.com/alura-cursos/imersao-java/api/NASA-APOD.json";
 		final String urlCurso = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
