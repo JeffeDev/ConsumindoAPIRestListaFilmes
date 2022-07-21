@@ -1,4 +1,4 @@
-package br.com.buscafilmes.beans;
+package NivelZeroBasico.beans;
 
 import java.util.List;
 

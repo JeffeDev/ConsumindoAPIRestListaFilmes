@@ -1,4 +1,4 @@
-package br.com.buscafilmes;
+package NivelZeroBasico;
 
 import java.io.IOException;
 import java.net.URI;

@@ -1,4 +1,4 @@
-package br.com.buscafilmes.beans;
+package NivelZeroBasico.beans;
 
 public class FilmesBean {
 	// API Filmes
