@@ -11,18 +11,19 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import br.com.buscafilmes.util.gerarFigurinha;
 import br.com.buscafilmes.util.JsonParserManual;
+import br.com.buscafilmes.util.gerarFigurinha;
 
 public class BuscafilmesAPIRest {
 	public static void main(String[] args) throws IOException, InterruptedException {
+		final String urlTeste ="https://raw.githubusercontent.com/alura-cursos/imersao-java/api/NASA-APOD.json";
 		final String urlCurso = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
         final String url = "https://raw.githubusercontent.com/alexfelipe/imersao-java/json/top250.json";
         
 		gerarFigurinha gerarFigurinha = new gerarFigurinha();
 		
 		// Fazer uma conexão HTTP e buscar os top 250 filmes
-        URI endereco = URI.create(url);
+        URI endereco = URI.create(urlCurso);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
@@ -41,9 +42,14 @@ public class BuscafilmesAPIRest {
         // Exibir e manipular os dados.
         
         for ( Map<String, String> filme: listaDeFilmes) {
-        	String urlImagem = filme.get("image");
+        	
         	Integer classificacao;
         	String stars = ""; 
+        	
+        	String urlImagem = filme.get("image");
+        	if (urlImagem == null) {
+        		urlImagem = filme.get("hdurl");
+        	}
         	
             try {
             	classificacao = Integer.parseInt(filme.get("rank"));
