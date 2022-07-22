@@ -1,19 +1,24 @@
 package Refactor_aula2;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import br.com.buscafilmes.util.gerarFigurinha;
+import br.com.buscafilmes.util.GerarFigurinha;
+import br.com.buscafilmes.util.JsonParser;
 
-public class Main {
+public class Main2 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         final String URL = "https://api.mocki.io/v2/549a5d8b/Top250Movies";
@@ -39,28 +44,36 @@ public class Main {
     private static void mostrarFilmes(JsonNode json) {
 
         // Percorrer o JSON e exibir os filmes
-    	gerarFigurinha gerarFigurinha = new gerarFigurinha();
-    	
-    	
     	System.out.println(json);
     	
         json.get("items").forEach(filme -> {
             int imDbRating = (int) Math.floor(filme.get("rank").asDouble());
-            String urlImagem = "";
+            
+            String urlImagem = filme.get("image").asText().toString();
             
             System.out.println( "-".repeat(60) );
             System.out.println(filme.get("title"));
             System.out.println(filme.get("year"));
             System.out.println(imDbRating);
             System.out.println( ("⭐".repeat(imDbRating)) );
-            System.out.println(filme.get("image"));
-           
-            try {
-            	urlImagem = filme.get("image").asText().toString();
-    			gerarFigurinha.criar(urlImagem, imDbRating, "⭐".repeat(imDbRating) );
-    		} catch (Exception e) {
-    			JOptionPane.showMessageDialog(null, "Erro imagem: " + e.getMessage());
-    		}            
+            System.out.println(urlImagem);
+            
+			try {
+				GerarFigurinha gerarFigurinha = new GerarFigurinha();
+				
+				InputStream inputStream = new URL(urlImagem).openStream();
+				BufferedImage imagemOriginal = ImageIO.read(inputStream);
+				
+				gerarFigurinha.criar(imagemOriginal, urlImagem );
+				
+			} catch (MalformedURLException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    		        
         });
     }
 }

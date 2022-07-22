@@ -1,6 +1,7 @@
 package br.com.buscafilmes.util;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JsonParserManual {
+public class JsonParserManual implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private static final Pattern REGEX_ITEMS = Pattern.compile("\\[(.+)\\]");
 	private static final Pattern REGEX_ATRIBUTOS_JSON = Pattern.compile("\"(.+?)\":\"?(.*?)\"?,");

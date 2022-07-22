@@ -8,7 +8,7 @@ import java.net.http.HttpResponse;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class Main {
+public class Main1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         final String URL = "https://api.mocki.io/v2/549a5d8b/Top250Movies";

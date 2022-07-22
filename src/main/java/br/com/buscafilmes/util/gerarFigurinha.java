@@ -1,6 +1,5 @@
 package br.com.buscafilmes.util;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,21 +8,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-public class gerarFigurinha {
+public class GerarFigurinha implements Serializable{
+	private static final long serialVersionUID = 1L;
 
-	public void criar(String urlImagem, Integer classificacao, String stars) throws Exception {
+	public void criar(BufferedImage imagemOriginal, String urlImagem) throws Exception {
 		// leitura da imagem
 
 		InputStream inputStreamJeffe = new FileInputStream(new File("imagemSemFundo/jeffersonimagem-removebg-preview.png"));
 		BufferedImage imagemJeffe = ImageIO.read(inputStreamJeffe);
-		
-		InputStream inputStream = new URL(urlImagem).openStream();
-		BufferedImage imagemOriginal = ImageIO.read(inputStream);
-		
 		
 		imagemOriginal = resizeImage(imagemOriginal, 750, 1200);
 		
@@ -46,24 +42,9 @@ public class gerarFigurinha {
 		
 		graphics.drawImage(imagemJeffe, 0, altura-300, null);
 		
-		if (classificacao >= 9) {
-			graphics.setColor(Color.YELLOW);
-			graphics.drawString("TOPZERA", (largura / 2) - 250, novaAltura - 100);
-			fonte = new Font(Font.SERIF, Font.ITALIC, 80);
-			
-		}else if (classificacao >=7 && classificacao < 9) {
-			graphics.setColor(Color.GREEN);
-			graphics.drawString("LEGAL", (largura / 2) - 170, novaAltura - 100);
-			fonte = new Font(Font.SERIF, Font.ITALIC, 110);
-			
-		}else if (classificacao < 7) {
-			graphics.setColor(Color.RED);
-			graphics.drawString("RUIM!", (largura / 2) - 170, novaAltura - 100);
-			fonte = new Font(Font.SERIF, Font.ITALIC, 200);
-		}
-		
+
 		graphics.setFont(fonte);
-		graphics.drawString(stars, 10, novaAltura - 150);	
+		//graphics.drawString(stars, 10, novaAltura - 150);	
 		
 		// salvar imagem arquivo
 		ImageIO.write(novaImagem, "png", new File("saida/" + toNomeFigurinha(urlImagem) + ".png"));
